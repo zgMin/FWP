@@ -125,12 +125,22 @@ def main() -> None:
     )
     parser.add_argument("--last-layers", type=int, default=8)
     parser.add_argument("--verify-merge", action="store_true")
+    parser.add_argument(
+        "--methods",
+        nargs="+",
+        choices=["base_no_prompt", "full_prompt", METHOD],
+        default=["base_no_prompt", "full_prompt", METHOD],
+        help="Methods to save and evaluate. Auto-Margin still needs Full Prompt internally as its teacher.",
+    )
     args = parser.parse_args()
+    selected_methods = list(dict.fromkeys(args.methods))
 
     if not 0 <= args.shard_index < args.num_shards:
         raise ValueError("shard-index must be in [0, num-shards)")
     if args.auto_margin_teacher_tokens is not None and args.auto_margin_teacher_tokens <= 0:
         raise ValueError("auto-margin-teacher-tokens must be positive")
+    if args.verify_merge and METHOD not in selected_methods:
+        raise ValueError("--verify-merge requires qtraj_teacher_auto_margin in --methods")
     if args.max_new_tokens is None:
         args.max_new_tokens = 32 if args.task == "verifiable" else 256
     if args.max_calib_tokens is None:
@@ -186,6 +196,7 @@ def main() -> None:
             "prefix_count",
             "qtraj_lm_teacher_tokens",
             "auto_margin_teacher_tokens",
+            "methods",
         ):
             if str(previous.get(key)) != str(getattr(args, key)):
                 raise ValueError(f"cannot resume: config mismatch for {key}")
@@ -203,103 +214,100 @@ def main() -> None:
         query_prefix_ids = tokenizer(query_prompt, add_special_tokens=False)["input_ids"]
         full_prefix_ids = tokenizer(full_prompt, add_special_tokens=False)["input_ids"]
 
+        needs_auto = METHOD in selected_methods
+        needs_base = "base_no_prompt" in selected_methods
+        needs_full = "full_prompt" in selected_methods or needs_auto or (args.task == "descriptive" and needs_base)
         remove_patch(model)
         remove_lm_head_patch(model)
-        full_text, full_visible_ids, full_eos = generate_text_and_ids(model, tokenizer, full_prompt, cfg)
-        base_text, base_ids, base_eos = generate_text_and_ids(model, tokenizer, query_prompt, cfg)
+        full_text = ""
+        full_visible_ids: list[int] = []
+        full_eos = False
+        if needs_full:
+            full_text, full_visible_ids, full_eos = generate_text_and_ids(model, tokenizer, full_prompt, cfg)
+        base_text = ""
+        base_ids: list[int] = []
+        base_eos = False
+        if needs_base:
+            base_text, base_ids, base_eos = generate_text_and_ids(model, tokenizer, query_prompt, cfg)
         teacher_ids = [*full_visible_ids, *([tokenizer.eos_token_id] if full_eos else [])]
-        auto_margin_teacher_ids = (
-            teacher_ids[: args.auto_margin_teacher_tokens]
-            if args.auto_margin_teacher_tokens is not None
-            else teacher_ids
-        )
+        outputs = {}
+        output_token_counts = {}
+        terminated_with_eos = {}
+        if needs_base:
+            outputs["base_no_prompt"] = base_text
+            output_token_counts["base_no_prompt"] = len(base_ids)
+            terminated_with_eos["base_no_prompt"] = base_eos
+        if "full_prompt" in selected_methods:
+            outputs["full_prompt"] = full_text
+            output_token_counts["full_prompt"] = len(full_visible_ids)
+            terminated_with_eos["full_prompt"] = full_eos
 
-        qtraj_started = time.time()
-        patches, lm_head_patch, _, fit_meta = fit_query_patch(
-            model,
-            tokenizer,
-            cfg,
-            prompt,
-            query,
-            selected_layers,
-            args.qtraj_rank,
-            args.qtraj_ridge,
-            args.qtraj_lm_rank,
-            args.qtraj_lm_scale,
-            args.qtraj_lm_teacher_tokens,
-            args.prefix_count,
-            "qtraj",
-            dtype,
-            input_mode="concat_user",
-            answer_text_override=full_text,
-        )
-        base_bundle = {"patches": patches, "lm_head_patch": lm_head_patch, "lm_scale": args.qtraj_lm_scale}
-        qtraj_seconds = time.time() - qtraj_started
-
-        auto_started = time.time()
-        auto_bundle, auto_meta = fit_auto_margin_teacher_anchor(
-            model,
-            cfg,
-            query_prefix_ids,
-            auto_margin_teacher_ids,
-            base_bundle,
-            dtype,
-        )
-        install_bundle(model, auto_bundle, cfg, dtype)
-        auto_text, auto_ids, auto_eos = generate_text_and_ids(model, tokenizer, query_prompt, cfg)
-        auto_seconds = time.time() - auto_started
+        auto_bundle = None
+        auto_meta = None
+        fit_meta = None
+        timing_seconds = {}
+        if needs_auto:
+            auto_margin_teacher_ids = teacher_ids[: args.auto_margin_teacher_tokens] if args.auto_margin_teacher_tokens is not None else teacher_ids
+            qtraj_started = time.time()
+            patches, lm_head_patch, _, fit_meta = fit_query_patch(
+                model, tokenizer, cfg, prompt, query, selected_layers, args.qtraj_rank, args.qtraj_ridge,
+                args.qtraj_lm_rank, args.qtraj_lm_scale, args.qtraj_lm_teacher_tokens, args.prefix_count,
+                "qtraj", dtype, input_mode="concat_user", answer_text_override=full_text,
+            )
+            base_bundle = {"patches": patches, "lm_head_patch": lm_head_patch, "lm_scale": args.qtraj_lm_scale}
+            timing_seconds["qtraj_fit"] = round(time.time() - qtraj_started, 3)
+            auto_started = time.time()
+            auto_bundle, auto_meta = fit_auto_margin_teacher_anchor(
+                model, cfg, query_prefix_ids, auto_margin_teacher_ids, base_bundle, dtype
+            )
+            install_bundle(model, auto_bundle, cfg, dtype)
+            auto_text, auto_ids, auto_eos = generate_text_and_ids(model, tokenizer, query_prompt, cfg)
+            timing_seconds["auto_margin"] = round(time.time() - auto_started, 3)
+            outputs[METHOD] = auto_text
+            output_token_counts[METHOD] = len(auto_ids)
+            terminated_with_eos[METHOD] = auto_eos
 
         result = {
             **row,
             "evaluation_query": query,
-            "outputs": {
-                "base_no_prompt": base_text,
-                "full_prompt": full_text,
-                METHOD: auto_text,
-            },
-            "output_token_counts": {
-                "base_no_prompt": len(base_ids),
-                "full_prompt": len(full_visible_ids),
-                METHOD: len(auto_ids),
-            },
-            "terminated_with_eos": {
-                "base_no_prompt": base_eos,
-                "full_prompt": full_eos,
-                METHOD: auto_eos,
-            },
-            "teacher_output": fit_meta["answer_text"],
-            "auto_margin_target": {
+            "outputs": outputs,
+            "output_token_counts": output_token_counts,
+            "terminated_with_eos": terminated_with_eos,
+            "timing_seconds": timing_seconds,
+        }
+        if needs_auto:
+            result["teacher_output"] = fit_meta["answer_text"]
+            result["auto_margin_target"] = {
                 "teacher_tokens_total": len(teacher_ids),
                 "teacher_tokens_used": len(auto_margin_teacher_ids),
                 "teacher_token_limit": args.auto_margin_teacher_tokens,
-            },
-            "auto_margin": auto_meta,
-            "timing_seconds": {
-                "qtraj_fit": round(qtraj_seconds, 3),
-                "auto_margin": round(auto_seconds, 3),
-                "total": round(time.time() - item_started, 3),
-            },
-        }
+            }
+            result["auto_margin"] = auto_meta
 
-        if args.task == "descriptive":
+        if args.task == "descriptive" and (needs_base or needs_auto):
             remove_patch(model)
             remove_lm_head_patch(model)
             full_logits = teacher_forced_logits(model, full_prefix_ids, teacher_ids, cfg.device)
-            base_logits = teacher_forced_logits(model, query_prefix_ids, teacher_ids, cfg.device)
-            install_bundle(model, auto_bundle, cfg, dtype)
-            auto_logits = teacher_forced_logits(model, query_prefix_ids, teacher_ids, cfg.device)
-            base_trajectory, base_kl = aligned_trajectory(
-                full_logits, base_logits, teacher_ids, tokenizer, "base_no_prompt"
-            )
-            auto_trajectory, auto_kl = aligned_trajectory(full_logits, auto_logits, teacher_ids, tokenizer, METHOD)
+            trajectory_kl_mean = {"full_prompt": 0.0} if "full_prompt" in selected_methods else {}
+            token_kl = {"full_prompt": []} if "full_prompt" in selected_methods else {}
+            if needs_base:
+                base_logits = teacher_forced_logits(model, query_prefix_ids, teacher_ids, cfg.device)
+                base_trajectory, base_kl = aligned_trajectory(full_logits, base_logits, teacher_ids, tokenizer, "base_no_prompt")
+                trajectory_kl_mean["base_no_prompt"] = base_kl
+                token_kl["base_no_prompt"] = base_trajectory
+                del base_logits
+            if needs_auto:
+                install_bundle(model, auto_bundle, cfg, dtype)
+                auto_logits = teacher_forced_logits(model, query_prefix_ids, teacher_ids, cfg.device)
+                auto_trajectory, auto_kl = aligned_trajectory(full_logits, auto_logits, teacher_ids, tokenizer, METHOD)
+                trajectory_kl_mean[METHOD] = auto_kl
+                token_kl[METHOD] = auto_trajectory
+                del auto_logits
             result["teacher_trajectory_token_count"] = len(teacher_ids)
-            result["trajectory_kl_mean"] = {"base_no_prompt": base_kl, "full_prompt": 0.0, METHOD: auto_kl}
-            result["token_kl"] = {
-                "base_no_prompt": base_trajectory,
-                "full_prompt": [],
-                METHOD: auto_trajectory,
-            }
-            del full_logits, base_logits, auto_logits
+            result["trajectory_kl_mean"] = trajectory_kl_mean
+            result["token_kl"] = token_kl
+            del full_logits
+        timing_seconds["total"] = round(time.time() - item_started, 3)
 
         if args.verify_merge:
             merge_meta = merge_bundle_into_model(model, auto_bundle, cfg, dtype)
@@ -316,30 +324,32 @@ def main() -> None:
         results.append(result)
         report = {
             "config": vars(args),
-            "methods": ["base_no_prompt", "full_prompt", METHOD],
+            "methods": selected_methods,
             "selected_layers": selected_layers,
             "result_count": len(results),
             "runtime_seconds": round(time.time() - started, 3),
             "results": results,
         }
         args.out.write_text(json.dumps(report, ensure_ascii=False, indent=2, default=str), encoding="utf-8")
-        print(
-            json.dumps(
+        progress = {
+            "progress": f"{len(results)}/{len(rows)}",
+            "pair_id": row["pair_id"],
+            "methods": selected_methods,
+            "seconds": result["timing_seconds"]["total"],
+        }
+        if needs_auto:
+            progress.update(
                 {
-                    "progress": f"{len(results)}/{len(rows)}",
-                    "pair_id": row["pair_id"],
                     "exact": auto_text == full_text,
                     "converged": auto_meta["converged"],
                     "constraints": auto_meta["constraint_count"],
                     "active": auto_meta["active_constraints"],
-                    "seconds": result["timing_seconds"]["total"],
-                },
-                ensure_ascii=False,
-            ),
-            flush=True,
-        )
+                }
+            )
+        print(json.dumps(progress, ensure_ascii=False), flush=True)
 
-        del patches, lm_head_patch, base_bundle, auto_bundle
+        if needs_auto:
+            del patches, lm_head_patch, base_bundle, auto_bundle
         remove_patch(model)
         remove_lm_head_patch(model)
         gc.collect()

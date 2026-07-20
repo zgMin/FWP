@@ -54,6 +54,12 @@ Hugging Face 目录，代码默认 `local_files_only=True`。
 是可用约束位置，不是严格固定秩；最终有效秩等于活跃约束数，至多为 32。省略该参数
 时，Auto-Margin 会约束整条 Full trajectory。
 
+Auto-Margin 入口也支持 `--methods`。例如只保存和评估 Auto-Margin：
+
+    --methods qtraj_teacher_auto_margin
+
+此时 Full Prompt 仍会在内部生成，以提供 teacher trajectory；Base 不会额外生成。
+
 ## 完整 Auto-Margin 评测
 
 下面以三张 GPU、三分片为例。每个进程内部只看到一张 GPU，因此
