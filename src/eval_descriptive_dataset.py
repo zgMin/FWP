@@ -196,7 +196,15 @@ def main() -> None:
     parser.add_argument("--add-eos", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--delta-max-scale", type=float, default=8.0)
     parser.add_argument("--top-k-delta", type=int, default=8)
+    parser.add_argument(
+        "--methods",
+        nargs="+",
+        choices=["qtraj_teacher_margin", "qtraj_topk_delta"],
+        default=["qtraj_teacher_margin", "qtraj_topk_delta"],
+        help="Patch methods to evaluate. Base and Full Prompt remain shared references.",
+    )
     args = parser.parse_args()
+    selected_methods = list(dict.fromkeys(args.methods))
 
     rows = load_rows(
         args.dataset,
@@ -233,7 +241,7 @@ def main() -> None:
     if args.out.exists():
         payload = json.loads(args.out.read_text(encoding="utf-8"))
         previous = payload.get("config", {})
-        for key in ("dataset", "shard_index", "num_shards", "prefix_count", "qtraj_lm_teacher_tokens", "teacher_tokens"):
+        for key in ("dataset", "shard_index", "num_shards", "prefix_count", "qtraj_lm_teacher_tokens", "teacher_tokens", "methods"):
             if str(previous.get(key)) != str(getattr(args, key)):
                 raise ValueError(f"cannot resume: config mismatch for {key}: {previous.get(key)!r} != {getattr(args, key)!r}")
         results = payload.get("results", [])
@@ -284,76 +292,62 @@ def main() -> None:
         base_bundle = {"patches": patches, "lm_head_patch": lm_head_patch, "lm_scale": args.qtraj_lm_scale}
         qtraj_seconds = time.time() - fit_started
 
-        margin_started = time.time()
-        margin_bundle, margin_constraints = fit_anchor_bundle(
-            model, tokenizer, cfg, prompt, query, base_bundle, full_text, "margin", dtype, args
-        )
-        install_bundle(model, margin_bundle, cfg, dtype)
-        margin_text, margin_ids, margin_eos = generate_text_and_ids(model, tokenizer, query_prompt, cfg)
-        margin_logits = teacher_forced_logits(model, query_prefix_ids, teacher_ids, cfg.device)
-        margin_trajectory, margin_kl = aligned_trajectory(
-            full_logits, margin_logits, teacher_ids, tokenizer, "qtraj_teacher_margin"
-        )
-        margin_seconds = time.time() - margin_started
-        del margin_logits
-
-        topk_started = time.time()
-        topk_bundle, topk_constraints = fit_anchor_bundle(
-            model, tokenizer, cfg, prompt, query, base_bundle, full_text, "topk_delta", dtype, args
-        )
-        install_bundle(model, topk_bundle, cfg, dtype)
-        topk_text, topk_ids, topk_eos = generate_text_and_ids(model, tokenizer, query_prompt, cfg)
-        topk_logits = teacher_forced_logits(model, query_prefix_ids, teacher_ids, cfg.device)
-        topk_trajectory, topk_kl = aligned_trajectory(
-            full_logits, topk_logits, teacher_ids, tokenizer, "qtraj_topk_delta"
-        )
-        topk_seconds = time.time() - topk_started
-        del topk_logits, full_logits
+        outputs = {"base_no_prompt": base_text, "full_prompt": full_text}
+        output_token_counts = {"base_no_prompt": len(base_ids), "full_prompt": len(full_visible_ids)}
+        terminated_with_eos = {"base_no_prompt": base_eos, "full_prompt": full_eos}
+        trajectory_kl_mean = {"base_no_prompt": base_kl, "full_prompt": 0.0}
+        token_kl = {"base_no_prompt": base_trajectory, "full_prompt": []}
+        timing_seconds = {"qtraj_fit": round(qtraj_seconds, 3)}
+        constraint_counts = {}
+        margin_bundle = topk_bundle = None
+        if "qtraj_teacher_margin" in selected_methods:
+            margin_started = time.time()
+            margin_bundle, margin_constraints = fit_anchor_bundle(
+                model, tokenizer, cfg, prompt, query, base_bundle, full_text, "margin", dtype, args
+            )
+            install_bundle(model, margin_bundle, cfg, dtype)
+            margin_text, margin_ids, margin_eos = generate_text_and_ids(model, tokenizer, query_prompt, cfg)
+            margin_logits = teacher_forced_logits(model, query_prefix_ids, teacher_ids, cfg.device)
+            margin_trajectory, margin_kl = aligned_trajectory(full_logits, margin_logits, teacher_ids, tokenizer, "qtraj_teacher_margin")
+            outputs["qtraj_teacher_margin"] = margin_text
+            output_token_counts["qtraj_teacher_margin"] = len(margin_ids)
+            terminated_with_eos["qtraj_teacher_margin"] = margin_eos
+            trajectory_kl_mean["qtraj_teacher_margin"] = margin_kl
+            token_kl["qtraj_teacher_margin"] = margin_trajectory
+            timing_seconds["teacher_margin"] = round(time.time() - margin_started, 3)
+            constraint_counts["teacher_margin"] = len(margin_constraints)
+            del margin_logits
+        if "qtraj_topk_delta" in selected_methods:
+            topk_started = time.time()
+            topk_bundle, topk_constraints = fit_anchor_bundle(
+                model, tokenizer, cfg, prompt, query, base_bundle, full_text, "topk_delta", dtype, args
+            )
+            install_bundle(model, topk_bundle, cfg, dtype)
+            topk_text, topk_ids, topk_eos = generate_text_and_ids(model, tokenizer, query_prompt, cfg)
+            topk_logits = teacher_forced_logits(model, query_prefix_ids, teacher_ids, cfg.device)
+            topk_trajectory, topk_kl = aligned_trajectory(full_logits, topk_logits, teacher_ids, tokenizer, "qtraj_topk_delta")
+            outputs["qtraj_topk_delta"] = topk_text
+            output_token_counts["qtraj_topk_delta"] = len(topk_ids)
+            terminated_with_eos["qtraj_topk_delta"] = topk_eos
+            trajectory_kl_mean["qtraj_topk_delta"] = topk_kl
+            token_kl["qtraj_topk_delta"] = topk_trajectory
+            timing_seconds["topk_delta"] = round(time.time() - topk_started, 3)
+            constraint_counts["topk_delta"] = len(topk_constraints)
+            del topk_logits
+        del full_logits
+        timing_seconds["total"] = round(time.time() - item_started, 3)
 
         result = {
             **row,
-            "outputs": {
-                "base_no_prompt": base_text,
-                "full_prompt": full_text,
-                "qtraj_teacher_margin": margin_text,
-                "qtraj_topk_delta": topk_text,
-            },
-            "output_token_counts": {
-                "base_no_prompt": len(base_ids),
-                "full_prompt": len(full_visible_ids),
-                "qtraj_teacher_margin": len(margin_ids),
-                "qtraj_topk_delta": len(topk_ids),
-            },
-            "terminated_with_eos": {
-                "base_no_prompt": base_eos,
-                "full_prompt": full_eos,
-                "qtraj_teacher_margin": margin_eos,
-                "qtraj_topk_delta": topk_eos,
-            },
+            "outputs": outputs,
+            "output_token_counts": output_token_counts,
+            "terminated_with_eos": terminated_with_eos,
             "teacher_trajectory_token_count": len(teacher_ids),
-            "trajectory_kl_mean": {
-                "base_no_prompt": base_kl,
-                "full_prompt": 0.0,
-                "qtraj_teacher_margin": margin_kl,
-                "qtraj_topk_delta": topk_kl,
-            },
-            "token_kl": {
-                "base_no_prompt": base_trajectory,
-                "full_prompt": [],
-                "qtraj_teacher_margin": margin_trajectory,
-                "qtraj_topk_delta": topk_trajectory,
-            },
+            "trajectory_kl_mean": trajectory_kl_mean,
+            "token_kl": token_kl,
             "teacher_matches_separate_full_generation": fit_meta["answer_text"] == full_text,
-            "constraint_counts": {
-                "teacher_margin": len(margin_constraints),
-                "topk_delta": len(topk_constraints),
-            },
-            "timing_seconds": {
-                "qtraj_fit": round(qtraj_seconds, 3),
-                "teacher_margin": round(margin_seconds, 3),
-                "topk_delta": round(topk_seconds, 3),
-                "total": round(time.time() - item_started, 3),
-            },
+            "constraint_counts": constraint_counts,
+            "timing_seconds": timing_seconds,
         }
         results.append(result)
         args.out.write_text(
@@ -382,7 +376,7 @@ def main() -> None:
 
     report = {
         "config": vars(args),
-        "methods": METHODS,
+        "methods": ["base_no_prompt", "full_prompt", *selected_methods],
         "kl_definition": "mean_t KL(P_full(.|C,x,y_<t) || P_method(.|x,y_<t)) on Full-prompt greedy tokens, including EOS when generated",
         "selected_layers": selected_layers,
         "result_count": len(results),

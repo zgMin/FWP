@@ -155,7 +155,15 @@ def main() -> None:
     parser.add_argument("--add-eos", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--delta-max-scale", type=float, default=8.0)
     parser.add_argument("--top-k-delta", type=int, default=8)
+    parser.add_argument(
+        "--methods",
+        nargs="+",
+        choices=["qtraj_teacher_margin", "qtraj_topk_delta"],
+        default=["qtraj_teacher_margin", "qtraj_topk_delta"],
+        help="Patch methods to evaluate. Base and Full Prompt remain shared references.",
+    )
     args = parser.parse_args()
+    selected_methods = list(dict.fromkeys(args.methods))
 
     if not 0 <= args.shard_index < args.num_shards:
         raise ValueError("shard-index must be in [0, num-shards)")
@@ -189,7 +197,7 @@ def main() -> None:
     if args.out.exists():
         payload = json.loads(args.out.read_text(encoding="utf-8"))
         previous = payload.get("config", {})
-        for key in ("dataset", "shard_index", "num_shards", "prefix_count", "qtraj_lm_teacher_tokens", "teacher_tokens"):
+        for key in ("dataset", "shard_index", "num_shards", "prefix_count", "qtraj_lm_teacher_tokens", "teacher_tokens", "methods"):
             if str(previous.get(key)) != str(getattr(args, key)):
                 raise ValueError(f"cannot resume: config mismatch for {key}: {previous.get(key)!r} != {getattr(args, key)!r}")
         results = payload.get("results", [])
@@ -230,41 +238,36 @@ def main() -> None:
         base_bundle = {"patches": patches, "lm_head_patch": lm_head_patch, "lm_scale": args.qtraj_lm_scale}
         qtraj_seconds = time.time() - fit_started
 
-        margin_started = time.time()
-        margin_bundle, margin_constraints = fit_anchor_bundle(
-            model, tokenizer, cfg, prompt, query, base_bundle, fit_meta["answer_text"], "margin", dtype, args
-        )
-        margin_text = generate_with_bundle(model, tokenizer, cfg, query_prompt, margin_bundle, dtype)
-        margin_seconds = time.time() - margin_started
-
-        topk_started = time.time()
-        topk_bundle, topk_constraints = fit_anchor_bundle(
-            model, tokenizer, cfg, prompt, query, base_bundle, fit_meta["answer_text"], "topk_delta", dtype, args
-        )
-        topk_text = generate_with_bundle(model, tokenizer, cfg, query_prompt, topk_bundle, dtype)
-        topk_seconds = time.time() - topk_started
+        outputs = {"base_no_prompt": base_text, "full_prompt": full_text}
+        timing_seconds = {"qtraj_fit": round(qtraj_seconds, 3)}
+        constraint_counts = {}
+        margin_bundle = topk_bundle = None
+        if "qtraj_teacher_margin" in selected_methods:
+            margin_started = time.time()
+            margin_bundle, margin_constraints = fit_anchor_bundle(
+                model, tokenizer, cfg, prompt, query, base_bundle, fit_meta["answer_text"], "margin", dtype, args
+            )
+            outputs["qtraj_teacher_margin"] = generate_with_bundle(model, tokenizer, cfg, query_prompt, margin_bundle, dtype)
+            timing_seconds["teacher_margin"] = round(time.time() - margin_started, 3)
+            constraint_counts["teacher_margin"] = len(margin_constraints)
+        if "qtraj_topk_delta" in selected_methods:
+            topk_started = time.time()
+            topk_bundle, topk_constraints = fit_anchor_bundle(
+                model, tokenizer, cfg, prompt, query, base_bundle, fit_meta["answer_text"], "topk_delta", dtype, args
+            )
+            outputs["qtraj_topk_delta"] = generate_with_bundle(model, tokenizer, cfg, query_prompt, topk_bundle, dtype)
+            timing_seconds["topk_delta"] = round(time.time() - topk_started, 3)
+            constraint_counts["topk_delta"] = len(topk_constraints)
+        timing_seconds["total"] = round(time.time() - item_started, 3)
 
         result = {
             **row,
             "evaluation_query": query,
             "format_protocol": FORMAT_PROTOCOLS[row["language"]],
-            "outputs": {
-                "base_no_prompt": base_text,
-                "full_prompt": full_text,
-                "qtraj_teacher_margin": margin_text,
-                "qtraj_topk_delta": topk_text,
-            },
+            "outputs": outputs,
             "teacher_output": fit_meta["answer_text"],
-            "timing_seconds": {
-                "qtraj_fit": round(qtraj_seconds, 3),
-                "teacher_margin": round(margin_seconds, 3),
-                "topk_delta": round(topk_seconds, 3),
-                "total": round(time.time() - item_started, 3),
-            },
-            "constraint_counts": {
-                "teacher_margin": len(margin_constraints),
-                "topk_delta": len(topk_constraints),
-            },
+            "timing_seconds": timing_seconds,
+            "constraint_counts": constraint_counts,
         }
         results.append(result)
         args.out.write_text(
@@ -281,7 +284,7 @@ def main() -> None:
 
     report = {
         "config": vars(args),
-        "methods": METHODS,
+        "methods": ["base_no_prompt", "full_prompt", *selected_methods],
         "selected_layers": selected_layers,
         "result_count": len(results),
         "runtime_seconds": round(time.time() - started, 3),

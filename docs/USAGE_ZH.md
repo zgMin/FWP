@@ -91,6 +91,17 @@ Full 的 greedy 输出，但其语义是每个 `(C, x)` 的答案轨迹编译，
     PYTHONPATH=src "$PY" src/eval_verifiable_expanded.py --help
     PYTHONPATH=src "$PY" src/eval_descriptive_dataset.py --help
 
+若只需要一个 patch 方案，在任一基线入口后加入 `--methods`。例如只跑 Top-k：
+
+    --methods qtraj_topk_delta
+
+或只跑 Margin：
+
+    --methods qtraj_teacher_margin
+
+Base、Full Prompt 与 QTraj 拟合仍会在内部执行，因为它们是 anchor 合成与对齐评测的
+共同依赖；未选中的 patch 不会拟合、生成或计算逐 token KL。
+
 将 Auto-Margin 分片合并到已有基线结果后，统一汇总描述性指标：
 
     PYTHONPATH=src "$PY" src/merge_auto_margin_results.py \
