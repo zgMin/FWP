@@ -1,0 +1,471 @@
+{
+  "overall": {
+    "rows": 30,
+    "base_no_prompt": {
+      "strict_format": 0.8666666666666667,
+      "tag_extraction": 0.8666666666666667,
+      "em": 0.03333333333333333,
+      "f1": 0.10280840087231063,
+      "containment": 0.03333333333333333
+    },
+    "full_prompt": {
+      "strict_format": 0.9666666666666667,
+      "tag_extraction": 0.9666666666666667,
+      "em": 0.5,
+      "f1": 0.6458058608058608,
+      "containment": 0.6
+    },
+    "qtraj_teacher_margin": {
+      "strict_format": 0.9666666666666667,
+      "tag_extraction": 0.9666666666666667,
+      "em": 0.5,
+      "f1": 0.6458058608058608,
+      "containment": 0.6
+    },
+    "qtraj_topk_delta": {
+      "strict_format": 0.9666666666666667,
+      "tag_extraction": 0.9666666666666667,
+      "em": 0.4666666666666667,
+      "f1": 0.6405244755244757,
+      "containment": 0.5666666666666667
+    },
+    "qtraj_teacher_auto_margin": {
+      "strict_format": 0.9666666666666667,
+      "tag_extraction": 0.9666666666666667,
+      "em": 0.5,
+      "f1": 0.6458058608058608,
+      "containment": 0.6
+    }
+  },
+  "by_language": {
+    "en": {
+      "rows": 20,
+      "base_no_prompt": {
+        "strict_format": 0.9,
+        "tag_extraction": 0.9,
+        "em": 0.05,
+        "f1": 0.10958333333333332,
+        "containment": 0.05
+      },
+      "full_prompt": {
+        "strict_format": 0.95,
+        "tag_extraction": 0.95,
+        "em": 0.55,
+        "f1": 0.6425641025641026,
+        "containment": 0.65
+      },
+      "qtraj_teacher_margin": {
+        "strict_format": 0.95,
+        "tag_extraction": 0.95,
+        "em": 0.55,
+        "f1": 0.6425641025641026,
+        "containment": 0.65
+      },
+      "qtraj_topk_delta": {
+        "strict_format": 0.95,
+        "tag_extraction": 0.95,
+        "em": 0.5,
+        "f1": 0.6125641025641027,
+        "containment": 0.6
+      },
+      "qtraj_teacher_auto_margin": {
+        "strict_format": 0.95,
+        "tag_extraction": 0.95,
+        "em": 0.55,
+        "f1": 0.6425641025641026,
+        "containment": 0.65
+      }
+    },
+    "zh": {
+      "rows": 10,
+      "base_no_prompt": {
+        "strict_format": 0.8,
+        "tag_extraction": 0.8,
+        "em": 0.0,
+        "f1": 0.08925853595026527,
+        "containment": 0.0
+      },
+      "full_prompt": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.4,
+        "f1": 0.6522893772893773,
+        "containment": 0.5
+      },
+      "qtraj_teacher_margin": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.4,
+        "f1": 0.6522893772893773,
+        "containment": 0.5
+      },
+      "qtraj_topk_delta": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.4,
+        "f1": 0.6964452214452215,
+        "containment": 0.5
+      },
+      "qtraj_teacher_auto_margin": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.4,
+        "f1": 0.6522893772893773,
+        "containment": 0.5
+      }
+    }
+  },
+  "by_source": {
+    "cmrc2018": {
+      "rows": 4,
+      "base_no_prompt": {
+        "strict_format": 0.5,
+        "tag_extraction": 0.5,
+        "em": 0.0,
+        "f1": 0.12163118836051166,
+        "containment": 0.0
+      },
+      "full_prompt": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.25,
+        "f1": 0.6217948717948718,
+        "containment": 0.5
+      },
+      "qtraj_teacher_margin": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.25,
+        "f1": 0.6217948717948718,
+        "containment": 0.5
+      },
+      "qtraj_topk_delta": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.25,
+        "f1": 0.6217948717948718,
+        "containment": 0.5
+      },
+      "qtraj_teacher_auto_margin": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.25,
+        "f1": 0.6217948717948718,
+        "containment": 0.5
+      }
+    },
+    "drcd": {
+      "rows": 4,
+      "base_no_prompt": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.0,
+        "f1": 0.1015151515151515,
+        "containment": 0.0
+      },
+      "full_prompt": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.25,
+        "f1": 0.5089285714285714,
+        "containment": 0.25
+      },
+      "qtraj_teacher_margin": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.25,
+        "f1": 0.5089285714285714,
+        "containment": 0.25
+      },
+      "qtraj_topk_delta": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.25,
+        "f1": 0.6193181818181818,
+        "containment": 0.25
+      },
+      "qtraj_teacher_auto_margin": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.25,
+        "f1": 0.5089285714285714,
+        "containment": 0.25
+      }
+    },
+    "natural_questions": {
+      "rows": 5,
+      "base_no_prompt": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.0,
+        "f1": 0.025,
+        "containment": 0.0
+      },
+      "full_prompt": {
+        "strict_format": 0.8,
+        "tag_extraction": 0.8,
+        "em": 0.2,
+        "f1": 0.41025641025641024,
+        "containment": 0.4
+      },
+      "qtraj_teacher_margin": {
+        "strict_format": 0.8,
+        "tag_extraction": 0.8,
+        "em": 0.2,
+        "f1": 0.41025641025641024,
+        "containment": 0.4
+      },
+      "qtraj_topk_delta": {
+        "strict_format": 0.8,
+        "tag_extraction": 0.8,
+        "em": 0.2,
+        "f1": 0.4902564102564102,
+        "containment": 0.4
+      },
+      "qtraj_teacher_auto_margin": {
+        "strict_format": 0.8,
+        "tag_extraction": 0.8,
+        "em": 0.2,
+        "f1": 0.41025641025641024,
+        "containment": 0.4
+      }
+    },
+    "relation_extraction": {
+      "rows": 5,
+      "base_no_prompt": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.2,
+        "f1": 0.2,
+        "containment": 0.2
+      },
+      "full_prompt": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 1.0,
+        "f1": 1.0,
+        "containment": 1.0
+      },
+      "qtraj_teacher_margin": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 1.0,
+        "f1": 1.0,
+        "containment": 1.0
+      },
+      "qtraj_topk_delta": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 1.0,
+        "f1": 1.0,
+        "containment": 1.0
+      },
+      "qtraj_teacher_auto_margin": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 1.0,
+        "f1": 1.0,
+        "containment": 1.0
+      }
+    },
+    "squad": {
+      "rows": 4,
+      "base_no_prompt": {
+        "strict_format": 0.75,
+        "tag_extraction": 0.75,
+        "em": 0.0,
+        "f1": 0.1,
+        "containment": 0.0
+      },
+      "full_prompt": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.5,
+        "f1": 0.5,
+        "containment": 0.5
+      },
+      "qtraj_teacher_margin": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.5,
+        "f1": 0.5,
+        "containment": 0.5
+      },
+      "qtraj_topk_delta": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.25,
+        "f1": 0.25,
+        "containment": 0.25
+      },
+      "qtraj_teacher_auto_margin": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.5,
+        "f1": 0.5,
+        "containment": 0.5
+      }
+    },
+    "synthetic": {
+      "rows": 4,
+      "base_no_prompt": {
+        "strict_format": 0.75,
+        "tag_extraction": 0.75,
+        "em": 0.0,
+        "f1": 0.0,
+        "containment": 0.0
+      },
+      "full_prompt": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 1.0,
+        "f1": 1.0,
+        "containment": 1.0
+      },
+      "qtraj_teacher_margin": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 1.0,
+        "f1": 1.0,
+        "containment": 1.0
+      },
+      "qtraj_topk_delta": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 1.0,
+        "f1": 1.0,
+        "containment": 1.0
+      },
+      "qtraj_teacher_auto_margin": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 1.0,
+        "f1": 1.0,
+        "containment": 1.0
+      }
+    },
+    "triviaqa": {
+      "rows": 4,
+      "base_no_prompt": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.0,
+        "f1": 0.16666666666666666,
+        "containment": 0.0
+      },
+      "full_prompt": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.25,
+        "f1": 0.45,
+        "containment": 0.5
+      },
+      "qtraj_teacher_margin": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.25,
+        "f1": 0.45,
+        "containment": 0.5
+      },
+      "qtraj_topk_delta": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.25,
+        "f1": 0.45,
+        "containment": 0.5
+      },
+      "qtraj_teacher_auto_margin": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.25,
+        "f1": 0.45,
+        "containment": 0.5
+      }
+    }
+  },
+  "by_partition": {
+    "base_short": {
+      "rows": 8,
+      "base_no_prompt": {
+        "strict_format": 0.75,
+        "tag_extraction": 0.75,
+        "em": 0.0,
+        "f1": 0.05,
+        "containment": 0.0
+      },
+      "full_prompt": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.75,
+        "f1": 0.75,
+        "containment": 0.75
+      },
+      "qtraj_teacher_margin": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.75,
+        "f1": 0.75,
+        "containment": 0.75
+      },
+      "qtraj_topk_delta": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.625,
+        "f1": 0.625,
+        "containment": 0.625
+      },
+      "qtraj_teacher_auto_margin": {
+        "strict_format": 1.0,
+        "tag_extraction": 1.0,
+        "em": 0.75,
+        "f1": 0.75,
+        "containment": 0.75
+      }
+    },
+    "expanded_public": {
+      "rows": 22,
+      "base_no_prompt": {
+        "strict_format": 0.9090909090909091,
+        "tag_extraction": 0.9090909090909091,
+        "em": 0.045454545454545456,
+        "f1": 0.12201145573496902,
+        "containment": 0.045454545454545456
+      },
+      "full_prompt": {
+        "strict_format": 0.9545454545454546,
+        "tag_extraction": 0.9545454545454546,
+        "em": 0.4090909090909091,
+        "f1": 0.607917082917083,
+        "containment": 0.5454545454545454
+      },
+      "qtraj_teacher_margin": {
+        "strict_format": 0.9545454545454546,
+        "tag_extraction": 0.9545454545454546,
+        "em": 0.4090909090909091,
+        "f1": 0.607917082917083,
+        "containment": 0.5454545454545454
+      },
+      "qtraj_topk_delta": {
+        "strict_format": 0.9545454545454546,
+        "tag_extraction": 0.9545454545454546,
+        "em": 0.4090909090909091,
+        "f1": 0.6461697393515575,
+        "containment": 0.5454545454545454
+      },
+      "qtraj_teacher_auto_margin": {
+        "strict_format": 0.9545454545454546,
+        "tag_extraction": 0.9545454545454546,
+        "em": 0.4090909090909091,
+        "f1": 0.607917082917083,
+        "containment": 0.5454545454545454
+      }
+    }
+  },
+  "runtime_seconds_max_shard": 0.0,
+  "metric_definition": {
+    "em": "English uses SQuAD lowercase/punctuation/article/whitespace normalization; Chinese uses NFKC, traditional-to-simplified conversion when OpenCC is available, and punctuation/whitespace removal.",
+    "f1": "English token F1 and Chinese normalized-character F1; maximum over gold aliases.",
+    "containment": "Normalized extracted prediction contains any normalized gold alias.",
+    "strict_format": "The complete output is exactly one non-empty <answer>...</answer> element."
+  }
+}

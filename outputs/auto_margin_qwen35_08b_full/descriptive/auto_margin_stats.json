@@ -1,0 +1,1548 @@
+{
+  "overall": {
+    "rows": 276,
+    "exact_output_match": 1.0,
+    "convergence_rate": 1.0,
+    "zero_anchor_rate": 0.03985507246376811,
+    "active_rank": {
+      "mean": 26.307971014492754,
+      "median": 21.0,
+      "p90": 60.0,
+      "p95": 80.25,
+      "max": 117.0
+    },
+    "constraint_count": {
+      "mean": 28.655797101449274,
+      "median": 22.0,
+      "p90": 64.5,
+      "p95": 88.75,
+      "max": 137.0
+    },
+    "anchor_parameter_count": {
+      "mean": 6559734.724637682,
+      "median": 5236224.0,
+      "p90": 14960640.0,
+      "p95": 20009856.0,
+      "max": 29173248.0
+    },
+    "solve_rounds": {
+      "mean": 2.677536231884058,
+      "median": 2.0,
+      "p90": 4.5,
+      "p95": 5.25,
+      "max": 8.0
+    },
+    "auto_margin_seconds": {
+      "mean": 42.59701811594203,
+      "median": 46.946,
+      "p90": 72.8505,
+      "p95": 89.0575,
+      "max": 130.717
+    },
+    "qtraj_fit_seconds": {
+      "mean": 15.090717391304349,
+      "median": 15.023,
+      "p90": 16.8765,
+      "p95": 17.425,
+      "max": 20.183
+    }
+  },
+  "groups": {
+    "language": {
+      "en": {
+        "rows": 138,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.050724637681159424,
+        "active_rank": {
+          "mean": 21.695652173913043,
+          "median": 17.0,
+          "p90": 46.599999999999994,
+          "p95": 59.900000000000034,
+          "max": 109.0
+        },
+        "constraint_count": {
+          "mean": 23.420289855072465,
+          "median": 17.5,
+          "p90": 51.0,
+          "p95": 64.90000000000003,
+          "max": 128.0
+        },
+        "anchor_parameter_count": {
+          "mean": 5409680.695652174,
+          "median": 4238848.0,
+          "p90": 11619430.399999999,
+          "p95": 14935705.600000009,
+          "max": 27178496.0
+        },
+        "solve_rounds": {
+          "mean": 2.5,
+          "median": 2.0,
+          "p90": 4.0,
+          "p95": 5.0,
+          "max": 8.0
+        },
+        "auto_margin_seconds": {
+          "mean": 38.07663768115942,
+          "median": 37.013,
+          "p90": 67.69839999999999,
+          "p95": 78.15745000000007,
+          "max": 130.717
+        },
+        "qtraj_fit_seconds": {
+          "mean": 14.969304347826087,
+          "median": 14.7905,
+          "p90": 16.9025,
+          "p95": 17.4514,
+          "max": 19.402
+        }
+      },
+      "zh": {
+        "rows": 138,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.028985507246376812,
+        "active_rank": {
+          "mean": 30.920289855072465,
+          "median": 26.0,
+          "p90": 71.3,
+          "p95": 84.90000000000003,
+          "max": 117.0
+        },
+        "constraint_count": {
+          "mean": 33.891304347826086,
+          "median": 26.5,
+          "p90": 78.3,
+          "p95": 101.30000000000001,
+          "max": 137.0
+        },
+        "anchor_parameter_count": {
+          "mean": 7709788.7536231885,
+          "median": 6482944.0,
+          "p90": 17778227.2,
+          "p95": 21169305.60000001,
+          "max": 29173248.0
+        },
+        "solve_rounds": {
+          "mean": 2.8550724637681157,
+          "median": 3.0,
+          "p90": 5.0,
+          "p95": 6.0,
+          "max": 8.0
+        },
+        "auto_margin_seconds": {
+          "mean": 47.11739855072464,
+          "median": 50.6285,
+          "p90": 84.0308,
+          "p95": 90.64785000000002,
+          "max": 124.199
+        },
+        "qtraj_fit_seconds": {
+          "mean": 15.212130434782608,
+          "median": 15.197,
+          "p90": 16.8356,
+          "p95": 17.4099,
+          "max": 20.183
+        }
+      }
+    },
+    "task_family": {
+      "descriptive": {
+        "rows": 180,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.027777777777777776,
+        "active_rank": {
+          "mean": 28.622222222222224,
+          "median": 24.5,
+          "p90": 59.19999999999999,
+          "p95": 80.04999999999998,
+          "max": 109.0
+        },
+        "constraint_count": {
+          "mean": 30.744444444444444,
+          "median": 26.0,
+          "p90": 64.1,
+          "p95": 88.14999999999995,
+          "max": 128.0
+        },
+        "anchor_parameter_count": {
+          "mean": 7136779.377777778,
+          "median": 6108928.0,
+          "p90": 14761164.799999997,
+          "p95": 19959987.199999996,
+          "max": 27178496.0
+        },
+        "solve_rounds": {
+          "mean": 2.7111111111111112,
+          "median": 2.0,
+          "p90": 4.0,
+          "p95": 6.0,
+          "max": 8.0
+        },
+        "auto_margin_seconds": {
+          "mean": 48.61267222222222,
+          "median": 49.896,
+          "p90": 73.79289999999997,
+          "p95": 93.44634999999991,
+          "max": 130.717
+        },
+        "qtraj_fit_seconds": {
+          "mean": 15.039872222222222,
+          "median": 14.928,
+          "p90": 16.6447,
+          "p95": 17.3634,
+          "max": 19.402
+        }
+      },
+      "format": {
+        "rows": 36,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.1111111111111111,
+        "active_rank": {
+          "mean": 15.694444444444445,
+          "median": 7.0,
+          "p90": 39.0,
+          "p95": 53.25,
+          "max": 93.0
+        },
+        "constraint_count": {
+          "mean": 18.5,
+          "median": 8.0,
+          "p90": 49.5,
+          "p95": 65.0,
+          "max": 122.0
+        },
+        "anchor_parameter_count": {
+          "mean": 3913315.5555555555,
+          "median": 1745408.0,
+          "p90": 9724416.0,
+          "p95": 13277568.0,
+          "max": 23188992.0
+        },
+        "solve_rounds": {
+          "mean": 2.4166666666666665,
+          "median": 2.0,
+          "p90": 5.0,
+          "p95": 5.0,
+          "max": 6.0
+        },
+        "auto_margin_seconds": {
+          "mean": 29.090305555555556,
+          "median": 15.956999999999999,
+          "p90": 79.111,
+          "p95": 87.02875,
+          "max": 90.399
+        },
+        "qtraj_fit_seconds": {
+          "mean": 15.201055555555556,
+          "median": 15.245999999999999,
+          "p90": 16.814999999999998,
+          "p95": 17.469250000000002,
+          "max": 20.183
+        }
+      },
+      "output_control": {
+        "rows": 24,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.0,
+        "active_rank": {
+          "mean": 11.083333333333334,
+          "median": 5.5,
+          "p90": 27.999999999999993,
+          "p95": 32.699999999999996,
+          "max": 46.0
+        },
+        "constraint_count": {
+          "mean": 12.25,
+          "median": 6.5,
+          "p90": 30.39999999999999,
+          "p95": 35.699999999999996,
+          "max": 50.0
+        },
+        "anchor_parameter_count": {
+          "mean": 2763562.6666666665,
+          "median": 1371392.0,
+          "p90": 6981631.999999998,
+          "p95": 8153548.799999999,
+          "max": 11469824.0
+        },
+        "solve_rounds": {
+          "mean": 2.125,
+          "median": 2.0,
+          "p90": 3.6999999999999993,
+          "p95": 4.0,
+          "max": 4.0
+        },
+        "auto_margin_seconds": {
+          "mean": 23.267916666666668,
+          "median": 12.8875,
+          "p90": 56.408199999999994,
+          "p95": 60.933499999999995,
+          "max": 67.896
+        },
+        "qtraj_fit_seconds": {
+          "mean": 15.519,
+          "median": 15.477,
+          "p90": 17.3271,
+          "p95": 17.55975,
+          "max": 20.035
+        }
+      },
+      "style": {
+        "rows": 36,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.05555555555555555,
+        "active_rank": {
+          "mean": 35.5,
+          "median": 32.5,
+          "p90": 71.5,
+          "p95": 98.0,
+          "max": 117.0
+        },
+        "constraint_count": {
+          "mean": 39.30555555555556,
+          "median": 33.5,
+          "p90": 78.5,
+          "p95": 104.5,
+          "max": 137.0
+        },
+        "anchor_parameter_count": {
+          "mean": 8851712.0,
+          "median": 8103680.0,
+          "p90": 17828096.0,
+          "p95": 24435712.0,
+          "max": 29173248.0
+        },
+        "solve_rounds": {
+          "mean": 3.138888888888889,
+          "median": 3.0,
+          "p90": 5.0,
+          "p95": 5.25,
+          "max": 8.0
+        },
+        "auto_margin_seconds": {
+          "mean": 38.91152777777778,
+          "median": 35.5925,
+          "p90": 72.91749999999999,
+          "p95": 85.44075000000001,
+          "max": 95.926
+        },
+        "qtraj_fit_seconds": {
+          "mean": 14.949083333333334,
+          "median": 14.637,
+          "p90": 17.188499999999998,
+          "p95": 18.142000000000003,
+          "max": 19.967
+        }
+      }
+    },
+    "length_variant": {
+      "long_redundant": {
+        "rows": 92,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.043478260869565216,
+        "active_rank": {
+          "mean": 25.67391304347826,
+          "median": 20.5,
+          "p90": 58.400000000000034,
+          "p95": 77.15000000000002,
+          "max": 117.0
+        },
+        "constraint_count": {
+          "mean": 28.27173913043478,
+          "median": 22.0,
+          "p90": 64.0,
+          "p95": 86.35000000000001,
+          "max": 137.0
+        },
+        "anchor_parameter_count": {
+          "mean": 6401636.173913044,
+          "median": 5111552.0,
+          "p90": 14561689.600000009,
+          "p95": 19236889.6,
+          "max": 29173248.0
+        },
+        "solve_rounds": {
+          "mean": 2.652173913043478,
+          "median": 2.0,
+          "p90": 4.900000000000006,
+          "p95": 5.450000000000003,
+          "max": 8.0
+        },
+        "auto_margin_seconds": {
+          "mean": 40.935228260869565,
+          "median": 41.9975,
+          "p90": 71.95750000000001,
+          "p95": 88.28425000000001,
+          "max": 112.938
+        },
+        "qtraj_fit_seconds": {
+          "mean": 15.241923913043479,
+          "median": 15.062999999999999,
+          "p90": 17.064,
+          "p95": 17.818649999999998,
+          "max": 19.967
+        }
+      },
+      "medium_redundant": {
+        "rows": 92,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.043478260869565216,
+        "active_rank": {
+          "mean": 28.23913043478261,
+          "median": 22.5,
+          "p90": 72.20000000000005,
+          "p95": 87.0,
+          "max": 109.0
+        },
+        "constraint_count": {
+          "mean": 30.902173913043477,
+          "median": 23.5,
+          "p90": 80.40000000000003,
+          "p95": 101.70000000000002,
+          "max": 128.0
+        },
+        "anchor_parameter_count": {
+          "mean": 7041257.739130435,
+          "median": 5610240.0,
+          "p90": 18002636.800000012,
+          "p95": 21692928.0,
+          "max": 27178496.0
+        },
+        "solve_rounds": {
+          "mean": 2.6847826086956523,
+          "median": 2.0,
+          "p90": 4.0,
+          "p95": 6.0,
+          "max": 8.0
+        },
+        "auto_margin_seconds": {
+          "mean": 44.6161847826087,
+          "median": 47.711,
+          "p90": 77.41710000000002,
+          "p95": 91.3183,
+          "max": 130.717
+        },
+        "qtraj_fit_seconds": {
+          "mean": 15.077804347826087,
+          "median": 15.0825,
+          "p90": 16.6396,
+          "p95": 17.3754,
+          "max": 20.035
+        }
+      },
+      "short": {
+        "rows": 92,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.03260869565217391,
+        "active_rank": {
+          "mean": 25.01086956521739,
+          "median": 20.0,
+          "p90": 54.70000000000002,
+          "p95": 67.70000000000002,
+          "max": 96.0
+        },
+        "constraint_count": {
+          "mean": 26.793478260869566,
+          "median": 21.5,
+          "p90": 57.70000000000002,
+          "p95": 73.15000000000002,
+          "max": 103.0
+        },
+        "anchor_parameter_count": {
+          "mean": 6236310.260869565,
+          "median": 4986880.0,
+          "p90": 13639116.800000004,
+          "p95": 16880588.800000004,
+          "max": 23937024.0
+        },
+        "solve_rounds": {
+          "mean": 2.6956521739130435,
+          "median": 3.0,
+          "p90": 4.0,
+          "p95": 5.0,
+          "max": 7.0
+        },
+        "auto_margin_seconds": {
+          "mean": 42.23964130434783,
+          "median": 47.4155,
+          "p90": 69.7935,
+          "p95": 85.33120000000002,
+          "max": 103.16
+        },
+        "qtraj_fit_seconds": {
+          "mean": 14.952423913043479,
+          "median": 14.8615,
+          "p90": 16.7194,
+          "p95": 17.314300000000003,
+          "max": 20.183
+        }
+      }
+    },
+    "subtype": {
+      "academic": {
+        "rows": 6,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.3333333333333333,
+        "active_rank": {
+          "mean": 28.833333333333332,
+          "median": 24.0,
+          "p90": 62.5,
+          "p95": 67.25,
+          "max": 72.0
+        },
+        "constraint_count": {
+          "mean": 30.333333333333332,
+          "median": 25.5,
+          "p90": 65.5,
+          "p95": 71.25,
+          "max": 77.0
+        },
+        "anchor_parameter_count": {
+          "mean": 7189418.666666667,
+          "median": 5984256.0,
+          "p90": 15584000.0,
+          "p95": 16768384.0,
+          "max": 17952768.0
+        },
+        "solve_rounds": {
+          "mean": 1.6666666666666667,
+          "median": 2.0,
+          "p90": 3.0,
+          "p95": 3.0,
+          "max": 3.0
+        },
+        "auto_margin_seconds": {
+          "mean": 25.492833333333333,
+          "median": 19.637,
+          "p90": 53.7795,
+          "p95": 61.671749999999996,
+          "max": 69.564
+        },
+        "qtraj_fit_seconds": {
+          "mean": 16.223166666666668,
+          "median": 15.899999999999999,
+          "p90": 19.009999999999998,
+          "p95": 19.4885,
+          "max": 19.967
+        }
+      },
+      "beginner_friendly": {
+        "rows": 6,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.0,
+        "active_rank": {
+          "mean": 21.0,
+          "median": 20.0,
+          "p90": 37.5,
+          "p95": 37.75,
+          "max": 38.0
+        },
+        "constraint_count": {
+          "mean": 24.333333333333332,
+          "median": 21.0,
+          "p90": 46.5,
+          "p95": 48.25,
+          "max": 50.0
+        },
+        "anchor_parameter_count": {
+          "mean": 5236224.0,
+          "median": 4986880.0,
+          "p90": 9350400.0,
+          "p95": 9412736.0,
+          "max": 9475072.0
+        },
+        "solve_rounds": {
+          "mean": 2.6666666666666665,
+          "median": 2.5,
+          "p90": 3.5,
+          "p95": 3.75,
+          "max": 4.0
+        },
+        "auto_margin_seconds": {
+          "mean": 37.9625,
+          "median": 37.3575,
+          "p90": 65.828,
+          "p95": 66.1705,
+          "max": 66.513
+        },
+        "qtraj_fit_seconds": {
+          "mean": 15.815333333333333,
+          "median": 15.669,
+          "p90": 17.188499999999998,
+          "p95": 17.30175,
+          "max": 17.415
+        }
+      },
+      "clear_coherent_structure": {
+        "rows": 30,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.0,
+        "active_rank": {
+          "mean": 24.866666666666667,
+          "median": 25.5,
+          "p90": 35.400000000000006,
+          "p95": 40.64999999999999,
+          "max": 59.0
+        },
+        "constraint_count": {
+          "mean": 26.133333333333333,
+          "median": 25.5,
+          "p90": 37.80000000000001,
+          "p95": 45.0,
+          "max": 64.0
+        },
+        "anchor_parameter_count": {
+          "mean": 6200354.133333334,
+          "median": 6358272.0,
+          "p90": 8826777.600000001,
+          "p95": 10135833.599999998,
+          "max": 14711296.0
+        },
+        "solve_rounds": {
+          "mean": 2.6666666666666665,
+          "median": 2.5,
+          "p90": 4.0,
+          "p95": 4.0,
+          "max": 4.0
+        },
+        "auto_margin_seconds": {
+          "mean": 44.38086666666667,
+          "median": 47.923,
+          "p90": 66.2425,
+          "p95": 66.70665,
+          "max": 69.479
+        },
+        "qtraj_fit_seconds": {
+          "mean": 15.269566666666666,
+          "median": 15.227,
+          "p90": 16.7033,
+          "p95": 17.218199999999996,
+          "max": 18.103
+        }
+      },
+      "complete_main_points": {
+        "rows": 30,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.0,
+        "active_rank": {
+          "mean": 28.933333333333334,
+          "median": 29.0,
+          "p90": 43.0,
+          "p95": 46.84999999999998,
+          "max": 59.0
+        },
+        "constraint_count": {
+          "mean": 30.3,
+          "median": 30.0,
+          "p90": 44.2,
+          "p95": 50.39999999999998,
+          "max": 64.0
+        },
+        "anchor_parameter_count": {
+          "mean": 7214353.066666666,
+          "median": 7230976.0,
+          "p90": 10721792.0,
+          "p95": 11681766.399999995,
+          "max": 14711296.0
+        },
+        "solve_rounds": {
+          "mean": 2.8,
+          "median": 2.0,
+          "p90": 4.100000000000001,
+          "p95": 5.549999999999997,
+          "max": 8.0
+        },
+        "auto_margin_seconds": {
+          "mean": 53.62606666666667,
+          "median": 53.04,
+          "p90": 66.796,
+          "p95": 85.36024999999992,
+          "max": 108.353
+        },
+        "qtraj_fit_seconds": {
+          "mean": 14.701033333333333,
+          "median": 14.705,
+          "p90": 16.171100000000003,
+          "p95": 17.3617,
+          "max": 17.55
+        }
+      },
+      "concise_direct": {
+        "rows": 6,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.0,
+        "active_rank": {
+          "mean": 8.333333333333334,
+          "median": 9.5,
+          "p90": 12.0,
+          "p95": 12.5,
+          "max": 13.0
+        },
+        "constraint_count": {
+          "mean": 8.5,
+          "median": 10.0,
+          "p90": 12.0,
+          "p95": 12.5,
+          "max": 13.0
+        },
+        "anchor_parameter_count": {
+          "mean": 2077866.6666666667,
+          "median": 2368768.0,
+          "p90": 2992128.0,
+          "p95": 3116800.0,
+          "max": 3241472.0
+        },
+        "solve_rounds": {
+          "mean": 2.0,
+          "median": 2.0,
+          "p90": 2.5,
+          "p95": 2.75,
+          "max": 3.0
+        },
+        "auto_margin_seconds": {
+          "mean": 10.078166666666666,
+          "median": 11.64,
+          "p90": 13.2345,
+          "p95": 13.68075,
+          "max": 14.127
+        },
+        "qtraj_fit_seconds": {
+          "mean": 14.075833333333334,
+          "median": 13.210999999999999,
+          "p90": 16.4755,
+          "p95": 17.442249999999998,
+          "max": 18.409
+        }
+      },
+      "cover_key_aspects": {
+        "rows": 30,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.06666666666666667,
+        "active_rank": {
+          "mean": 21.133333333333333,
+          "median": 20.5,
+          "p90": 32.2,
+          "p95": 42.24999999999996,
+          "max": 56.0
+        },
+        "constraint_count": {
+          "mean": 22.266666666666666,
+          "median": 21.0,
+          "p90": 36.1,
+          "p95": 45.24999999999996,
+          "max": 57.0
+        },
+        "anchor_parameter_count": {
+          "mean": 5269469.866666666,
+          "median": 5111552.0,
+          "p90": 8028876.800000001,
+          "p95": 10534783.999999989,
+          "max": 13963264.0
+        },
+        "solve_rounds": {
+          "mean": 2.3666666666666667,
+          "median": 2.5,
+          "p90": 3.0,
+          "p95": 3.549999999999997,
+          "max": 4.0
+        },
+        "auto_margin_seconds": {
+          "mean": 47.35393333333333,
+          "median": 52.614999999999995,
+          "p90": 67.23880000000001,
+          "p95": 70.0504,
+          "max": 73.517
+        },
+        "qtraj_fit_seconds": {
+          "mean": 15.354666666666667,
+          "median": 15.242,
+          "p90": 16.6429,
+          "p95": 17.585299999999997,
+          "max": 19.402
+        }
+      },
+      "direct_complete_response": {
+        "rows": 30,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.06666666666666667,
+        "active_rank": {
+          "mean": 14.533333333333333,
+          "median": 9.5,
+          "p90": 34.0,
+          "p95": 40.599999999999966,
+          "max": 52.0
+        },
+        "constraint_count": {
+          "mean": 15.133333333333333,
+          "median": 9.5,
+          "p90": 34.2,
+          "p95": 44.24999999999996,
+          "max": 60.0
+        },
+        "anchor_parameter_count": {
+          "mean": 3623799.466666667,
+          "median": 2368768.0,
+          "p90": 8477696.0,
+          "p95": 10123366.399999991,
+          "max": 12965888.0
+        },
+        "solve_rounds": {
+          "mean": 1.8333333333333333,
+          "median": 2.0,
+          "p90": 3.0,
+          "p95": 3.549999999999997,
+          "max": 4.0
+        },
+        "auto_margin_seconds": {
+          "mean": 29.0988,
+          "median": 22.298499999999997,
+          "p90": 60.01350000000001,
+          "p95": 65.60894999999998,
+          "max": 76.276
+        },
+        "qtraj_fit_seconds": {
+          "mean": 14.802033333333334,
+          "median": 14.717500000000001,
+          "p90": 15.840100000000001,
+          "p95": 16.326099999999997,
+          "max": 17.08
+        }
+      },
+      "exactly_two": {
+        "rows": 6,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.0,
+        "active_rank": {
+          "mean": 24.166666666666668,
+          "median": 23.0,
+          "p90": 39.5,
+          "p95": 42.75,
+          "max": 46.0
+        },
+        "constraint_count": {
+          "mean": 26.333333333333332,
+          "median": 25.5,
+          "p90": 43.0,
+          "p95": 46.5,
+          "max": 50.0
+        },
+        "anchor_parameter_count": {
+          "mean": 6025813.333333333,
+          "median": 5734912.0,
+          "p90": 9849088.0,
+          "p95": 10659456.0,
+          "max": 11469824.0
+        },
+        "solve_rounds": {
+          "mean": 2.6666666666666665,
+          "median": 2.5,
+          "p90": 4.0,
+          "p95": 4.0,
+          "max": 4.0
+        },
+        "auto_margin_seconds": {
+          "mean": 25.376833333333334,
+          "median": 23.526,
+          "p90": 36.4115,
+          "p95": 39.72625,
+          "max": 43.041
+        },
+        "qtraj_fit_seconds": {
+          "mean": 15.7685,
+          "median": 15.8095,
+          "p90": 17.444,
+          "p95": 17.521,
+          "max": 17.598
+        }
+      },
+      "fixed_prefix": {
+        "rows": 6,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.0,
+        "active_rank": {
+          "mean": 3.1666666666666665,
+          "median": 1.5,
+          "p90": 7.0,
+          "p95": 8.0,
+          "max": 9.0
+        },
+        "constraint_count": {
+          "mean": 3.1666666666666665,
+          "median": 1.5,
+          "p90": 7.0,
+          "p95": 8.0,
+          "max": 9.0
+        },
+        "anchor_parameter_count": {
+          "mean": 789589.3333333334,
+          "median": 374016.0,
+          "p90": 1745408.0,
+          "p95": 1994752.0,
+          "max": 2244096.0
+        },
+        "solve_rounds": {
+          "mean": 1.6666666666666667,
+          "median": 1.0,
+          "p90": 3.0,
+          "p95": 3.5,
+          "max": 4.0
+        },
+        "auto_margin_seconds": {
+          "mean": 6.3585,
+          "median": 5.393,
+          "p90": 9.5275,
+          "p95": 10.655750000000001,
+          "max": 11.784
+        },
+        "qtraj_fit_seconds": {
+          "mean": 15.817166666666667,
+          "median": 15.6965,
+          "p90": 16.799,
+          "p95": 17.070999999999998,
+          "max": 17.343
+        }
+      },
+      "fixed_suffix": {
+        "rows": 6,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.0,
+        "active_rank": {
+          "mean": 2.5,
+          "median": 2.5,
+          "p90": 4.0,
+          "p95": 4.5,
+          "max": 5.0
+        },
+        "constraint_count": {
+          "mean": 2.6666666666666665,
+          "median": 2.5,
+          "p90": 4.5,
+          "p95": 5.25,
+          "max": 6.0
+        },
+        "anchor_parameter_count": {
+          "mean": 623360.0,
+          "median": 623360.0,
+          "p90": 997376.0,
+          "p95": 1122048.0,
+          "max": 1246720.0
+        },
+        "solve_rounds": {
+          "mean": 1.6666666666666667,
+          "median": 2.0,
+          "p90": 2.0,
+          "p95": 2.0,
+          "max": 2.0
+        },
+        "auto_margin_seconds": {
+          "mean": 3.6403333333333334,
+          "median": 3.464,
+          "p90": 5.343999999999999,
+          "p95": 5.427999999999999,
+          "max": 5.512
+        },
+        "qtraj_fit_seconds": {
+          "mean": 14.485166666666666,
+          "median": 14.335,
+          "p90": 16.009999999999998,
+          "p95": 16.314,
+          "max": 16.618
+        }
+      },
+      "item_marker": {
+        "rows": 6,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.0,
+        "active_rank": {
+          "mean": 14.5,
+          "median": 16.5,
+          "p90": 19.5,
+          "p95": 20.25,
+          "max": 21.0
+        },
+        "constraint_count": {
+          "mean": 16.833333333333332,
+          "median": 20.5,
+          "p90": 21.5,
+          "p95": 21.75,
+          "max": 22.0
+        },
+        "anchor_parameter_count": {
+          "mean": 3615488.0,
+          "median": 4114176.0,
+          "p90": 4862208.0,
+          "p95": 5049216.0,
+          "max": 5236224.0
+        },
+        "solve_rounds": {
+          "mean": 2.5,
+          "median": 2.5,
+          "p90": 3.0,
+          "p95": 3.0,
+          "max": 3.0
+        },
+        "auto_margin_seconds": {
+          "mean": 57.696,
+          "median": 56.150999999999996,
+          "p90": 64.78,
+          "p95": 66.338,
+          "max": 67.896
+        },
+        "qtraj_fit_seconds": {
+          "mean": 16.005166666666668,
+          "median": 15.9245,
+          "p90": 18.4775,
+          "p95": 19.25625,
+          "max": 20.035
+        }
+      },
+      "json_answer": {
+        "rows": 6,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.0,
+        "active_rank": {
+          "mean": 13.5,
+          "median": 12.5,
+          "p90": 18.5,
+          "p95": 20.25,
+          "max": 22.0
+        },
+        "constraint_count": {
+          "mean": 14.0,
+          "median": 13.5,
+          "p90": 18.5,
+          "p95": 20.25,
+          "max": 22.0
+        },
+        "anchor_parameter_count": {
+          "mean": 3366144.0,
+          "median": 3116800.0,
+          "p90": 4612864.0,
+          "p95": 5049216.0,
+          "max": 5485568.0
+        },
+        "solve_rounds": {
+          "mean": 3.1666666666666665,
+          "median": 3.0,
+          "p90": 4.0,
+          "p95": 4.0,
+          "max": 4.0
+        },
+        "auto_margin_seconds": {
+          "mean": 12.9925,
+          "median": 12.344999999999999,
+          "p90": 15.956999999999999,
+          "p95": 16.5215,
+          "max": 17.086
+        },
+        "qtraj_fit_seconds": {
+          "mean": 15.162666666666667,
+          "median": 15.011,
+          "p90": 16.797,
+          "p95": 17.320999999999998,
+          "max": 17.845
+        }
+      },
+      "key_value": {
+        "rows": 6,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.0,
+        "active_rank": {
+          "mean": 10.0,
+          "median": 4.5,
+          "p90": 23.5,
+          "p95": 31.25,
+          "max": 39.0
+        },
+        "constraint_count": {
+          "mean": 11.666666666666666,
+          "median": 5.0,
+          "p90": 28.0,
+          "p95": 37.5,
+          "max": 47.0
+        },
+        "anchor_parameter_count": {
+          "mean": 2493440.0,
+          "median": 1122048.0,
+          "p90": 5859584.0,
+          "p95": 7792000.0,
+          "max": 9724416.0
+        },
+        "solve_rounds": {
+          "mean": 3.0,
+          "median": 3.0,
+          "p90": 4.0,
+          "p95": 4.0,
+          "max": 4.0
+        },
+        "auto_margin_seconds": {
+          "mean": 18.597833333333334,
+          "median": 5.5634999999999994,
+          "p90": 47.627,
+          "p95": 65.5835,
+          "max": 83.54
+        },
+        "qtraj_fit_seconds": {
+          "mean": 15.2815,
+          "median": 14.6405,
+          "p90": 17.714,
+          "p95": 18.9485,
+          "max": 20.183
+        }
+      },
+      "markdown_table": {
+        "rows": 6,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.0,
+        "active_rank": {
+          "mean": 41.333333333333336,
+          "median": 24.5,
+          "p90": 91.5,
+          "p95": 92.25,
+          "max": 93.0
+        },
+        "constraint_count": {
+          "mean": 51.0,
+          "median": 30.5,
+          "p90": 114.5,
+          "p95": 118.25,
+          "max": 122.0
+        },
+        "anchor_parameter_count": {
+          "mean": 10306218.666666666,
+          "median": 6108928.0,
+          "p90": 22814976.0,
+          "p95": 23001984.0,
+          "max": 23188992.0
+        },
+        "solve_rounds": {
+          "mean": 3.6666666666666665,
+          "median": 3.5,
+          "p90": 5.5,
+          "p95": 5.75,
+          "max": 6.0
+        },
+        "auto_margin_seconds": {
+          "mean": 54.44233333333334,
+          "median": 52.7805,
+          "p90": 87.5035,
+          "p95": 87.97825,
+          "max": 88.453
+        },
+        "qtraj_fit_seconds": {
+          "mean": 14.982333333333333,
+          "median": 15.3765,
+          "p90": 15.761,
+          "p95": 15.8585,
+          "max": 15.956
+        }
+      },
+      "numbered_list": {
+        "rows": 6,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.16666666666666666,
+        "active_rank": {
+          "mean": 8.5,
+          "median": 3.0,
+          "p90": 22.0,
+          "p95": 31.5,
+          "max": 41.0
+        },
+        "constraint_count": {
+          "mean": 9.833333333333334,
+          "median": 3.0,
+          "p90": 26.0,
+          "p95": 37.0,
+          "max": 48.0
+        },
+        "anchor_parameter_count": {
+          "mean": 2119424.0,
+          "median": 748032.0,
+          "p90": 5485568.0,
+          "p95": 7854336.0,
+          "max": 10223104.0
+        },
+        "solve_rounds": {
+          "mean": 1.3333333333333333,
+          "median": 1.0,
+          "p90": 2.5,
+          "p95": 2.75,
+          "max": 3.0
+        },
+        "auto_margin_seconds": {
+          "mean": 30.817,
+          "median": 35.8865,
+          "p90": 47.524,
+          "p95": 47.76350000000001,
+          "max": 48.003
+        },
+        "qtraj_fit_seconds": {
+          "mean": 15.624833333333333,
+          "median": 15.589500000000001,
+          "p90": 16.444,
+          "p95": 16.6695,
+          "max": 16.895
+        }
+      },
+      "patient_teacher": {
+        "rows": 6,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.0,
+        "active_rank": {
+          "mean": 58.0,
+          "median": 53.5,
+          "p90": 94.0,
+          "p95": 105.5,
+          "max": 117.0
+        },
+        "constraint_count": {
+          "mean": 65.16666666666667,
+          "median": 60.5,
+          "p90": 107.5,
+          "p95": 122.25,
+          "max": 137.0
+        },
+        "anchor_parameter_count": {
+          "mean": 14461952.0,
+          "median": 13339904.0,
+          "p90": 23438336.0,
+          "p95": 26305792.0,
+          "max": 29173248.0
+        },
+        "solve_rounds": {
+          "mean": 4.666666666666667,
+          "median": 5.0,
+          "p90": 5.0,
+          "p95": 5.0,
+          "max": 5.0
+        },
+        "auto_margin_seconds": {
+          "mean": 50.91266666666667,
+          "median": 43.150999999999996,
+          "p90": 79.155,
+          "p95": 87.54050000000001,
+          "max": 95.926
+        },
+        "qtraj_fit_seconds": {
+          "mean": 14.571666666666667,
+          "median": 14.001999999999999,
+          "p90": 16.375,
+          "p95": 16.637,
+          "max": 16.899
+        }
+      },
+      "pipe_line": {
+        "rows": 6,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.0,
+        "active_rank": {
+          "mean": 8.333333333333334,
+          "median": 2.5,
+          "p90": 21.5,
+          "p95": 30.25,
+          "max": 39.0
+        },
+        "constraint_count": {
+          "mean": 10.333333333333334,
+          "median": 2.5,
+          "p90": 27.5,
+          "p95": 39.25,
+          "max": 51.0
+        },
+        "anchor_parameter_count": {
+          "mean": 2077866.6666666667,
+          "median": 623360.0,
+          "p90": 5360896.0,
+          "p95": 7542656.0,
+          "max": 9724416.0
+        },
+        "solve_rounds": {
+          "mean": 1.6666666666666667,
+          "median": 1.0,
+          "p90": 3.0,
+          "p95": 4.0,
+          "max": 5.0
+        },
+        "auto_margin_seconds": {
+          "mean": 23.1205,
+          "median": 20.883499999999998,
+          "p90": 44.9675,
+          "p95": 46.16525,
+          "max": 47.363
+        },
+        "qtraj_fit_seconds": {
+          "mean": 15.592500000000001,
+          "median": 16.567500000000003,
+          "p90": 17.0395,
+          "p95": 17.19175,
+          "max": 17.344
+        }
+      },
+      "professional_advisor": {
+        "rows": 6,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.0,
+        "active_rank": {
+          "mean": 25.166666666666668,
+          "median": 26.5,
+          "p90": 40.0,
+          "p95": 40.5,
+          "max": 41.0
+        },
+        "constraint_count": {
+          "mean": 26.166666666666668,
+          "median": 27.5,
+          "p90": 42.0,
+          "p95": 42.5,
+          "max": 43.0
+        },
+        "anchor_parameter_count": {
+          "mean": 6275157.333333333,
+          "median": 6607616.0,
+          "p90": 9973760.0,
+          "p95": 10098432.0,
+          "max": 10223104.0
+        },
+        "solve_rounds": {
+          "mean": 3.0,
+          "median": 3.0,
+          "p90": 4.0,
+          "p95": 4.0,
+          "max": 4.0
+        },
+        "auto_margin_seconds": {
+          "mean": 36.726,
+          "median": 30.291,
+          "p90": 66.3415,
+          "p95": 67.89925,
+          "max": 69.457
+        },
+        "qtraj_fit_seconds": {
+          "mean": 14.675333333333334,
+          "median": 14.807500000000001,
+          "p90": 15.896,
+          "p95": 16.0895,
+          "max": 16.283
+        }
+      },
+      "relationships_and_reasons": {
+        "rows": 30,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.0,
+        "active_rank": {
+          "mean": 56.36666666666667,
+          "median": 57.0,
+          "p90": 87.0,
+          "p95": 96.89999999999995,
+          "max": 109.0
+        },
+        "constraint_count": {
+          "mean": 63.46666666666667,
+          "median": 62.5,
+          "p90": 101.4,
+          "p95": 113.24999999999996,
+          "max": 128.0
+        },
+        "anchor_parameter_count": {
+          "mean": 14054690.133333333,
+          "median": 14212608.0,
+          "p90": 21692928.0,
+          "p95": 24161433.599999987,
+          "max": 27178496.0
+        },
+        "solve_rounds": {
+          "mean": 4.3,
+          "median": 4.0,
+          "p90": 7.0,
+          "p95": 7.549999999999997,
+          "max": 8.0
+        },
+        "auto_margin_seconds": {
+          "mean": 74.94673333333333,
+          "median": 71.571,
+          "p90": 104.13780000000001,
+          "p95": 119.13154999999996,
+          "max": 130.717
+        },
+        "qtraj_fit_seconds": {
+          "mean": 14.921133333333334,
+          "median": 14.7315,
+          "p90": 16.603700000000003,
+          "p95": 17.12025,
+          "max": 17.635
+        }
+      },
+      "self_contained_reasoning": {
+        "rows": 30,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.03333333333333333,
+        "active_rank": {
+          "mean": 25.9,
+          "median": 22.5,
+          "p90": 61.0,
+          "p95": 66.49999999999997,
+          "max": 96.0
+        },
+        "constraint_count": {
+          "mean": 27.166666666666668,
+          "median": 22.5,
+          "p90": 63.2,
+          "p95": 69.94999999999997,
+          "max": 103.0
+        },
+        "anchor_parameter_count": {
+          "mean": 6458009.6,
+          "median": 5610240.0,
+          "p90": 15209984.0,
+          "p95": 16581375.999999993,
+          "max": 23937024.0
+        },
+        "solve_rounds": {
+          "mean": 2.3,
+          "median": 2.0,
+          "p90": 4.0,
+          "p95": 4.0,
+          "max": 4.0
+        },
+        "auto_margin_seconds": {
+          "mean": 42.26963333333333,
+          "median": 45.993,
+          "p90": 69.1328,
+          "p95": 69.61064999999999,
+          "max": 82.777
+        },
+        "qtraj_fit_seconds": {
+          "mean": 15.1908,
+          "median": 15.347,
+          "p90": 16.7815,
+          "p95": 17.174799999999998,
+          "max": 17.586
+        }
+      },
+      "storyteller": {
+        "rows": 6,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.0,
+        "active_rank": {
+          "mean": 71.66666666666667,
+          "median": 63.5,
+          "p90": 101.0,
+          "p95": 104.0,
+          "max": 107.0
+        },
+        "constraint_count": {
+          "mean": 81.33333333333333,
+          "median": 74.5,
+          "p90": 111.0,
+          "p95": 117.5,
+          "max": 124.0
+        },
+        "anchor_parameter_count": {
+          "mean": 17869653.333333332,
+          "median": 15833344.0,
+          "p90": 25183744.0,
+          "p95": 25931776.0,
+          "max": 26679808.0
+        },
+        "solve_rounds": {
+          "mean": 4.833333333333333,
+          "median": 4.5,
+          "p90": 7.0,
+          "p95": 7.5,
+          "max": 8.0
+        },
+        "auto_margin_seconds": {
+          "mean": 72.297,
+          "median": 72.65950000000001,
+          "p90": 85.7055,
+          "p95": 85.97025,
+          "max": 86.235
+        },
+        "qtraj_fit_seconds": {
+          "mean": 14.333166666666667,
+          "median": 14.4215,
+          "p90": 15.641,
+          "p95": 15.910499999999999,
+          "max": 16.18
+        }
+      },
+      "xml_answer": {
+        "rows": 6,
+        "exact_output_match": 1.0,
+        "convergence_rate": 1.0,
+        "zero_anchor_rate": 0.5,
+        "active_rank": {
+          "mean": 12.5,
+          "median": 10.5,
+          "p90": 27.0,
+          "p95": 30.0,
+          "max": 33.0
+        },
+        "constraint_count": {
+          "mean": 14.166666666666666,
+          "median": 11.0,
+          "p90": 31.5,
+          "p95": 35.25,
+          "max": 39.0
+        },
+        "anchor_parameter_count": {
+          "mean": 3116800.0,
+          "median": 2618112.0,
+          "p90": 6732288.0,
+          "p95": 7480320.0,
+          "max": 8228352.0
+        },
+        "solve_rounds": {
+          "mean": 1.6666666666666667,
+          "median": 1.0,
+          "p90": 4.0,
+          "p95": 4.5,
+          "max": 5.0
+        },
+        "auto_margin_seconds": {
+          "mean": 34.571666666666665,
+          "median": 28.409,
+          "p90": 73.4975,
+          "p95": 81.94825,
+          "max": 90.399
+        },
+        "qtraj_fit_seconds": {
+          "mean": 14.5625,
+          "median": 14.7475,
+          "p90": 15.604500000000002,
+          "p95": 15.828750000000001,
+          "max": 16.053
+        }
+      }
+    }
+  }
+}
