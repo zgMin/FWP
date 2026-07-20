@@ -1,0 +1,11 @@
+# Install a CUDA-compatible PyTorch build separately for the target machine.
+# Tested runtime: Python 3.10, torch 2.6.0+cu124.
+transformers==5.13.0
+scipy==1.13.1
+numpy==2.2.5
+nltk==3.9.4
+opencc-python-reimplemented
+sentencepiece
+safetensors
+accelerate
+pytest
